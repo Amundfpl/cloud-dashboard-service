@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Countries Dashboard API – Assignment 2</title>
+    <style>
+        :root {
+            --primary: #1a3c40;
+            --accent: #ff9900;
+            --bg: #fafafa;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        p.description {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background-color: #fff;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-radius: 6px;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        code {
+            background-color: #f2f2f2;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        pre {
+            background: #f0f0f0;
+            line-height: 1.8;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            color: #777;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Countries Dashboard API</h1>
+    <p class="description">NTNU Assignment 2 – Retrieve and manage dynamic dashboards using real-time data.</p>
+</header>
+
+<section>
+    <h2>Available GET Endpoints</h2>
+    <ul>
+        <li><a href="/dashboard/v1/registrations/">/dashboard/v1/registrations/</a> – View all dashboard configurations</li>
+        <li><a href="/dashboard/v1/dashboards/">/dashboard/v1/dashboards/{id}</a> – List dashboard with matching ID</li>
+        <li><a href="/dashboard/v1/notifications/">/dashboard/v1/notifications/</a> – View registered webhooks</li>
+        <li><a href="/dashboard/v1/status/">/dashboard/v1/status/</a> – API status & uptime</li>
+    </ul>
+</section>
+
+<section>
+    <h2>POST / PUT / PATCH / DELETE / HEAD</h2>
+    <p>Use Postman to test the following endpoints:</p>
+
+    <strong>POST – Create a new dashboard config</strong>
+    <pre><code>{
+  "country": "Norway",
+  "isoCode": "NO",
+  "features": {
+    "temperature": true,
+    "coordinates": true,
+    "capital": true,
+    "targetCurrencies": ["EUR", "USD"]
+  }
+}</code></pre>
+
+    <strong>PUT – Overwrite full config by ID</strong>
+    <pre><code>{
+  "country": "Sweden",
+  "isoCode": "SE",
+  "features": {
+    "temperature": false,
+    "area": true,
+    "targetCurrencies": ["EUR"]
+  }
+}</code></pre>
+
+    <strong>PATCH – Partially update config</strong>
+    <pre><code>{
+  "features": {
+    "temperature": false,
+    "capital": false
+  }
+}</code></pre>
+
+    <strong>DELETE – Remove dashboard by ID</strong>
+    <pre><code>DELETE /dashboard/v1/registrations/{id}</code></pre>
+
+    <strong>HEAD – Check if config exists</strong>
+    <pre><code>HEAD /dashboard/v1/registrations/{id}</code></pre>
+</section>
+
+<section>
+    <h2>Webhooks</h2>
+    <p>Register a webhook to get notified when specific events occur.</p>
+
+    <strong>Register a webhook (POST)</strong>
+    <pre><code>{
+  "event": "LOW_TEMP", // URL to be invoked when event occurs
+  "country": "NO", //Country that is registered with ISO code, or empty if all countries
+  "url": "https://webhook.site/your-url" // Event on which it is invoked
+}</code></pre>
+
+    <h3>Supported Webhook Events</h3>
+    <ul>
+        <li><code>REGISTER</code> – Triggered when a new dashboard is created</li>
+        <li><code>CHANGE</code> – When a dashboard is fully updated via PUT</li>
+        <li><code>PATCH</code> – When a dashboard is partially updated</li>
+        <li><code>DELETE</code> – When a dashboard is deleted</li>
+        <li><code>INVOKE</code> – When a dashboard is retrieved via GET</li>
+        <li><code>LOW_TEMP</code> – When temperature < 0°C during enrichment</li>
+    </ul>
+
+    <h3>Delete a webhook</h3>
+    <pre><code>DELETE /dashboard/v1/notifications/{id}</code></pre>
+</section>
+
+<footer>
+    <p><strong>Group: Screw2025 – Assignment 2</strong></p>
+    <p>
+        Project Repository:
+        <a href="https://github.com/Amundfpl/Assignment-2" target="_blank">
+            github.com/Amundfpl/Assignment-2
+        </a>
+    </p>
+</footer>
+</body>
+</html>
