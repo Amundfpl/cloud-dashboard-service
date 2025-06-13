@@ -64,6 +64,9 @@ const (
 	CredentialsDir         = "credentials"
 	TestCredentialsFile    = "test-serviceAccountKey.json"
 
+	//Render environment variable
+	GOOGLE_APPLICATION_CREDENTIALS = "GOOGLE_APPLICATION_CREDENTIALS"
+
 	// API Paths
 	RESTCountriesByAlpha     = "/alpha/"
 	OpenMeteoForecast        = "/v1/forecast"

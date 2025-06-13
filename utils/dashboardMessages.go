@@ -135,3 +135,8 @@ const (
 	ErrMissingPathID    = "missing ID in path"
 	ErrMethodNotAllowed = "Method not allowed"
 )
+
+// -- Render Errors --
+const (
+	ErrGOOGLE_APPLICATION_CREDENTIALS_NotSet = "GOOGLE_APPLICATION_CREDENTIALS not set — falling back to default local path"
+)

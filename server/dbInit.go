@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/amundfpl/Assignment-2/db"
 	"github.com/amundfpl/Assignment-2/utils"
+	"log"
+	"os"
 )
 
 // DatabaseInitialization sets up the Firebase and Firestore clients.
@@ -14,8 +16,14 @@ func DatabaseInitialization() error {
 	ctx := context.Background()
 
 	// Initialize Firebase app using credentials from the utils package
-	if firebaseErr := db.InitFirebase(ctx, utils.CredentialsFirebaseKey); firebaseErr != nil {
-		return fmt.Errorf(utils.ErrFirebaseInit, firebaseErr)
+	firebasePath := os.Getenv(utils.GOOGLE_APPLICATION_CREDENTIALS)
+	if firebasePath == "" {
+		log.Println(utils.ErrGOOGLE_APPLICATION_CREDENTIALS_NotSet)
+		firebasePath = utils.CredentialsFirebaseKey
+	}
+
+	if err := db.InitFirebase(ctx, firebasePath); err != nil {
+		return fmt.Errorf(utils.ErrFirebaseInit, err)
 	}
 
 	// Initialize Firestore client based on the Firebase app
