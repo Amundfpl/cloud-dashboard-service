@@ -1,9 +1,5 @@
 # Assignment 2 — Cloud-Based Dashboard Service
 
-> **Note for reviewers:** The service is fully deployed and live on our OpenStack VM.
-> You do **not** need to clone or redeploy the project to test it.
-> The GitLab repository is provided to verify code structure, testing, implementation, and deployment setup.
-
 This project is a backend web service built in Go, originally developed as part of the Cloud Technologies course (PROG2005) at NTNU. It exposes a RESTful dashboard API with support for configurable dashboards, live data enrichment, caching, webhook notifications, and advanced HTTP methods (PATCH, HEAD, DELETE). The service is containerized using Docker and was initially deployed on an OpenStack VM.
 
 > **This repository is a public-friendly refactored version of the original coursework project.**  
@@ -35,50 +31,15 @@ The original project was created by **Amund** and **Halvard** as part of the cou
 
 ---
 
-## Deployment
-
-This project is containerized and runs on an OpenStack VM.
-
-### Steps to deploy on OpenStack VM:
-
-1. **Clone the repository**:
-   ```bash
-   git clone git@github.com:Amundfpl/cloud-dashboard-service.git
-   cd Assignment-2
-   ```
-
-2. **(Optional)** If redeploying on a different VM, place the Firebase key:
-    - Add your `firebase-key.json` inside the `credentials/` directory.
-    -  This file is intentionally excluded from Git via `.gitignore`.
-
-   > **Note:** The Firebase key is already mounted on our deployed VM. **Reviewers do not need access to it**. Only required if redeploying.
-
-3. **Run the deployment script**:
-   ```bash
-   ./deploy.sh
-   ```
-> **Note:** If you get a **permission denied** error when trying to run the deploy script, make sure it’s executable by running:  
-> `chmod +x deploy.sh`
-> This makes the script executable so you can run it with `./deploy.sh`.
-
-
-   This will:
-    - Build the Docker image
-    - Stop and remove any previous container
-    - Mount credentials (if provided)
-    - Expose the service on port `8080`
-
----
-
 ## Deployed Service URL
 
 The service is live at:
 
 ```
-add render link... or other deployment link
+https://cloud-dashboard-service.onrender.com/
 ```
-
-> Ensure port 8080 is open on your OpenStack VM.
+> **Note for reviewers:** Render is a free hosting service that puts the app to sleep after 15 minutes of inactivity. 
+> So the first request may take a few seconds to wake up. Subsequent requests will be faster.
 
 ---
 
@@ -261,8 +222,7 @@ curl -X POST http://localhost:8080/dashboard/v1/notifications/ \
 Assignment-2/
 ├── .github/
 │   └── workflows/
-│       ├── devops.yml
-│       └── sync.yaml
+│       └── devops.yaml
 ├── cache/
 │   ├── cache_autoPurge.go
 │   ├── cache_autoPurge_test.go
@@ -318,7 +278,6 @@ Assignment-2/
 │   ├── responseUtil.go
 │   └── util.go
 ├── .gitignore
-├── deploy.sh                         # Deployment script
 ├── Dockerfile                        # Multi-stage Docker build
 ├── go.mod
 ├── go.sum
@@ -366,13 +325,6 @@ go mod tidy
 
 ## Credits
 
-| Name    | Main Contributions                      |
-|---------|------------------------------------------|
-| Amund   | Caching logic, Dockerization, Deployment |
-| Halvard | Webhook system, Testing, Service logic   |
-
-We worked closely on most of the project. These areas highlight primary focus areas.
-
 External data from:
 - [REST Countries](https://restcountries.com/)
 - [Open-Meteo](https://open-meteo.com/)
@@ -382,9 +334,8 @@ External data from:
 
 ## Notes
 
-- Please ensure you do **not** commit your Firebase key file.
 - All endpoints were tested using Go's built-in `httptest` package.
 - External APIs were stubbed in tests to ensure no real requests were made.
 - We implemented **advanced caching with purge**, full webhook triggering, PATCH/HEAD/DELETE support, and proper Docker deployment.
-- The service follows RESTful principles and is easy to deploy via `deploy.sh` on any Docker-ready VM.
+- The service follows RESTful principles.
 
