@@ -32,6 +32,7 @@ func InitializeRoutes() http.Handler {
 
 	// Serve static content and homepage fallback
 	router.HandleFunc(utils.RouteRoot, FileServerWithFallback(utils.StaticDir))
+	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	return router
 }

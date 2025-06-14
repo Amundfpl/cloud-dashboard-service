@@ -1,0 +1,128 @@
+
+:root {
+    --primary-bg: #0f1b2b;
+    --primary-text: #f4f4f4;
+    --accent: #e6b800;
+    --card-bg: #1b2b3a;
+    --border: #334155;
+    --code-bg: #1f2a38;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
+    margin: 0;
+    padding: 2rem;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+header p {
+    color: #cccccc;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+nav a {
+    margin: 0 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.section-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.card pre {
+    background-color: #1c2938;
+    color: #f4f4f4;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: inset 0 0 0 1px #2d3c4d;
+}
+
+.card code {
+    background-color: #2b3a4a;
+    color: #f1f1f1;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+}
+
+
+h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+}
+
+pre {
+    background-color: var(--code-bg);
+    color: #f4f4f4;
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+code {
+    background-color: inherit;
+    color: inherit;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+ul {
+    padding-left: 1.2rem;
+    color: #dddddd;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #888888;
+}
+
+a:hover {
+    text-decoration: underline;
+}

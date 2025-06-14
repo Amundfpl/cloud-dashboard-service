@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Documentation – Cloud Dashboard Service</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    
+</head>
+<body>
+<header>
+    <h1>API Documentation</h1>
+    <p class="description">Explore and test endpoints available in the Cloud Dashboard Service.</p>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/docs.html">API Docs</a>
+        <a href="/dashboard/v1/status/">Status</a>
+    </nav>
+</header>
+
+<div class="section-group">
+    <div class="card">
+        <h2>Register a Dashboard</h2>
+        <pre><code>POST /dashboard/v1/registrations/</code></pre>
+        <p>Example:</p>
+        <pre><code>{
+  "country": "Norway",
+  "isoCode": "NO",
+  "features": {
+    "temperature": true,
+    "coordinates": true,
+    "capital": true,
+    "targetCurrencies": ["EUR", "USD"]
+  }
+}</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Retrieve and Modify Dashboards</h2>
+        <ul>
+            <li><code>GET /dashboard/v1/dashboards/{id}</code></li>
+            <li><code>PUT /dashboard/v1/registrations/{id}</code> – replace config</li>
+            <li><code>PATCH /dashboard/v1/registrations/{id}</code> – partial update</li>
+            <li><code>DELETE /dashboard/v1/registrations/{id}</code> – remove config</li>
+            <li><code>HEAD /dashboard/v1/registrations/{id}</code> – check existence</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Webhook Registration</h2>
+        <pre><code>POST /dashboard/v1/notifications/</code></pre>
+        <p>Example:</p>
+        <pre><code>{
+  "event": "INVOKE",
+  "country": "NO",
+  "url": "https://webhook.site/your-webhook"
+}</code></pre>
+        <p>Supported Events:</p>
+        <ul>
+            <li>REGISTER</li>
+            <li>CHANGE</li>
+            <li>PATCH</li>
+            <li>DELETE</li>
+            <li>INVOKE</li>
+            <li>LOW_TEMP</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>System Status</h2>
+        <pre><code>GET /dashboard/v1/status/</code></pre>
+        <p>Returns health status of APIs and service uptime.</p>
+    </div>
+</div>
+
+<footer>
+    <p>
+        GitHub Repository:
+        <a href="https://github.com/Amundfpl/cloud-dashboard-service" target="_blank">
+            github.com/Amundfpl/cloud-dashboard-service
+        </a>
+    </p>
+</footer>
+</body>
+</html>
